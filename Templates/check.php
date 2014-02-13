@@ -1,7 +1,5 @@
  <?php 
 
-
-
 require_once "../StyleJS/json/JSON.php";
 $json = new Services_JSON();
 
@@ -9,13 +7,9 @@ $url1 = $_GET["url1"];
 $url2 =  $_GET["url2"];
 
 $descriptorspec = array(
-    0 => array("pipe", "r"),  // stdin is a pipe that the child will read from
-   1 => array("pipe", "w"),  // stdout is a pipe that the child will write to
-<<<<<<< HEAD
-    2 => array("pipe", "w")// 2 is STDERR for process
-=======
-    2 => array("pipe","w")// 2 is STDERR for process
->>>>>>> 026a087326faab35a0ffb6d39881c8628302024a
+    0 => array("pipe", "r"),  // stdin read pipe for child process
+    1 => array("pipe", "w"),  // stdout write pipe for child process
+    2 => array("pipe", "w")   // stderr write pipe for child process
  );
 
 $cmd = "DISPLAY=:0 java -Djava.awt.headless=true -jar ./demo3.jar ".$url1." ".$url2." &";
@@ -31,6 +25,5 @@ $result = $json->encode($parts[sizeof($parts)-1]);
 print($result);
 
 proc_close($p);
-
 
 ?>
